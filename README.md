@@ -1,0 +1,3 @@
+- put the .dir and .dat of the version you are interested in /Locale
+- use `node h1z1-string-finder.js "STRING_ID"` to get a particular string
+- use `npm start` to update the string.log file with your new / other values.

@@ -1,0 +1,17 @@
+{
+  "name": "h1z1-string-finder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "commander": "^6.2.0",
+    "hash-jenkins": "^1.0.1",
+    "soe-locale": "git+https://github.com/QuentinGruber/soe-locale.git"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node h1z1-string-finder.js -a > strings.log"
+  },
+  "author": "Quentin Gruber",
+  "license": "MIT"
+}
