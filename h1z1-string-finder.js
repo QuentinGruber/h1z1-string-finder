@@ -18,15 +18,24 @@ function lookupString(stringId) {
 }
 
 program.option("-a, --all", "log all strings");
+program.option("-j, --json", "log all strings in a .json file");
 program.parse(process.argv);
 
-if (program.all) {
+if (program.json) {
+  const stringList = [];
   Object.keys(strings).forEach((string, stringid) => {
-    console.log(`String ID #${stringid}: ${lookupString(stringid)}`);
+    stringList.push({ id: stringid, text: lookupString(stringid) });
   });
+  fs.writeFileSync("strings.json", JSON.stringify(stringList));
 } else {
-  const { args } = program.parse(process.argv);
-  args.forEach((arg) => {
-    console.log(`String ID #${arg}: ${lookupString(arg)}`);
-  });
+  if (program.all) {
+    Object.keys(strings).forEach((string, stringid) => {
+      console.log(`String ID #${stringid}: ${lookupString(stringid)}`);
+    });
+  } else {
+    const { args } = program.parse(process.argv);
+    args.forEach((arg) => {
+      console.log(`String ID #${arg}: ${lookupString(arg)}`);
+    });
+  }
 }
