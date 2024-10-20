@@ -5,16 +5,16 @@ const { program } = require("commander");
 
 const strings = locale.parseFromBuffer(
   fs.readFileSync("Locale/en_us_data.dat"),
-  fs.readFileSync("Locale/en_us_data.dir")
+  fs.readFileSync("Locale/en_us_data.dir"),
 );
 
 function lookupString(stringId) {
   var hash = Jenkins.lookup2("Global.Text." + stringId);
   if (hash in strings) {
     return strings[hash].string;
-  } else {
+  } /*else {
     return "[STRING #" + stringId + "NOT FOUND]";
-  }
+  }*/
 }
 
 program.option("-a, --all", "log all strings");
@@ -29,9 +29,12 @@ if (program.json) {
   fs.writeFileSync("strings.json", JSON.stringify(stringList));
 } else {
   if (program.all) {
-    Object.keys(strings).forEach((string, stringid) => {
-      console.log(`String ID #${stringid}: ${lookupString(stringid)}`);
-    });
+    for (let i = 0; i < 2147483647; i++) {
+      const result = lookupString(i);
+      if (result) {
+        console.log(`String ID #${i}: ${result}`);
+      }
+    }
   } else {
     const { args } = program.parse(process.argv);
     args.forEach((arg) => {
